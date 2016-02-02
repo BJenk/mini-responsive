@@ -1,0 +1,94 @@
+/* ============
+Experiment for creating a grid using :nth-of-type selectors
+==============*/
+
+/*Declare some width variables*/
+$sm: "(max-width: 640px)";
+$md: "(min-width: 641px) and (max-width: 1023px)";
+$lg: "(min-width: 1024px)";
+
+/* ============
+Global Container
+==============*/
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  	&:before{
+    visibility: hidden;
+	display: block;
+	content: "";
+	clear: both;
+	height: 0;
+      }
+      >.container{
+      padding: 0;    
+      }
+   .column{
+       width: 23.5%; 
+       margin: 10px 0px;
+       margin-right:2%; 
+       float:left;     
+       @media #{$sm} {width:100%; margin-right:0%;}
+   }
+   .products{
+       width: 74.5%; 
+       float:left;
+       @media #{$sm} {width:100%}
+   }
+}
+
+
+ /* =========
+ Grid System
+ ==========*/
+ 
+//  set up some basics 
+
+// .one-up, .two-up, .four-up{ position: absolute}
+
+.one-up>*,
+.two-up>*,
+.three-up>*,
+.four-up>*{
+    display: block;
+    float:left;  
+    margin: 10px 0px; 
+}
+ 
+.one-up>*{width: 100%;}
+
+.two-up>*{
+  width: 49%;
+    &:nth-of-type(odd)  { margin-left:0%}
+    &:nth-of-type(even) { margin-left:2%}
+    &:last-of-type{clear:both;}
+  @media #{$md} {width: 48%;  &:nth-of-type(even)  {margin-left:4%}}
+  @media #{$sm} {width: 100%; &:nth-of-type(even)  {margin-left:0%}}
+}
+
+.three-up>*{
+    width: 32%;
+    @media #{$lg}, #{$md}{
+        &:nth-of-type(3n+1) {margin-left:0%; margin-right: 1%; clear:both;}
+        &:nth-of-type(3n+2) {margin-left:1%; margin-right: 1%;}
+        &:nth-of-type(3n+3) {margin-left:1%; margin-right: 0%;}}
+    @media #{$sm} {width: 100%}  
+}
+
+.four-up>*{
+  width: 23.5%;
+  @media #{$lg}{
+    &:first-of-type{clear:both;}
+    &:nth-of-type(4n+1) { margin-left: 0%; margin-right:2%; clear:both;}
+    &:nth-of-type(4n+2) { margin-right: 1% }
+    &:nth-of-type(4n+3) { margin-left: 1%;}
+    &:nth-of-type(4n+4) { margin-left:2%; margin-right: 0%}}   
+  @media #{$md}{
+    width: 48%;
+    &:first-of-type{clear:both;}
+    &:nth-of-type(odd)  { margin-right:4%}} 
+  @media #{$sm} {width: 100%;}
+}
+
